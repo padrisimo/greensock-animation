@@ -19,20 +19,12 @@ timeline.to("#box", 0.5, { y: 100 })
 timeline.to("#box", 0.5, { x: 50 })
 timeline.to("#box", 0.5, { y: 50 })
 
-$("#box")
-  .addEventListener("click", () => {
-    if (timeline.isActive()) {
-      timeline.pause()
-    } else {
-      timeline.resume()
-    }
-  })
-
-  document.addEventListener("wheel", event => {
-    if (event.wheelDelta > 0) {
-      // timeline.progress(timeline.progress() + 0.1)
-      TweenMax.to(timeline, 0.25, { progress: "+=0.1" })
-    } else {
-      TweenMax.to(timeline, 0.25, { progress: "-=0.1" })
-    }
-  })
+document.addEventListener("click", event => {
+  const { x, y } = event
+  TweenMax.fromTo(
+    "#box",
+    1,
+    { x, y },
+    { x: 500, y: 500 }
+  )
+})
