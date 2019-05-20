@@ -1,11 +1,16 @@
 import { TweenMax } from "gsap";
 
-const box = document.createElement("div");
-box.setAttribute("class", "box");
-document.body.appendChild(box);
+TweenMax.set(document.body, { perspective: 100 });
 
-TweenMax.set(box, { transformPerspective: 20 })
+Array.from({ length: 30 })
+  .map(() => document.createElement("div"))
+  .forEach(box => {
+    box.setAttribute("class", "box")
+    document.body.appendChild(box)
 
-box.addEventListener("click", () => {
-  TweenMax.to(box, 1, { rotationY: "+=180" })
-});
+    box.addEventListener("mouseover", () => {
+      if (!TweenMax.isTweening(box)) {
+        TweenMax.to(box, 1, { rotationY: "+=180" })
+      }
+    })
+  })
