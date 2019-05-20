@@ -1,4 +1,4 @@
-import { TweenMax } from "gsap";
+import { TweenMax } from "gsap"
 
 const divs = Array.from({ length: 100 }, () =>
   document.createElement("div")
@@ -7,10 +7,12 @@ const divs = Array.from({ length: 100 }, () =>
 divs.forEach(div => {
   TweenMax.set(div, {
     position: "absolute",
-    x: `${Math.random() * window.innerWidth}px`,
-    y: `${Math.random() * window.innerHeight}px`,
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
     width: 20,
     height: 20,
+    xPercent: -50,
+    yPercent: -50,
     backgroundColor: "green",
     border: "3px solid black"
   })
@@ -18,8 +20,9 @@ divs.forEach(div => {
   document.body.appendChild(div)
 })
 
-document.addEventListener("click", event => {
-  const { x, y } = event
+TweenMax.to(divs, 10, { x: 100, y: 100 })
 
-  TweenMax.to(divs, 1, { x, y })
+document.addEventListener("click", event => {
+  TweenMax.killTweensOf(event.target)
+  //TweenMax.killAll(true)
 })
